@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+fitbot.db
+.DS_Store
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
