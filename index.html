@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitBot AI — Your intelligent AI-powered fitness companion. Get personalized workout plans, nutrition advice, and real-time coaching.">
+  <meta name="theme-color" content="#06060f">
+  <title>FitBot AI — Your Intelligent Fitness Companion</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <div class="bg-gradient"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <div class="logo-icon">🤖</div>
+      <div class="logo-text"><span>FitBot</span> AI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#chat">Chat</a></li>
+      <li><a href="#plan">Plan</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#tracker">Tracker</a></li>
+      <li><a href="#exercises">Exercises</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})">
+      Start Chatting →
+    </button>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="pulse-dot"></span>AI-Powered Fitness Intelligence</div>
+        <h1>Your Personal<br><span class="gradient-text">AI Fitness Coach</span></h1>
+        <p>Get personalized workout plans, nutrition guidance, and real-time coaching powered by intelligent algorithms. Transform your fitness journey today.</p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})">💬 Start Chatting</button>
+          <button class="btn-secondary" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">⚡ Open Tools</button>
+        </div>
+        <div class="stats-bar">
+          <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Always Available</div></div>
+          <div class="stat-item"><div class="stat-number">35+</div><div class="stat-label">Fitness Topics</div></div>
+          <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Smart Tools</div></div>
+          <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">Custom Plans</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Tip -->
+    <section class="section" style="padding-top:0;">
+      <div class="daily-tip glass-card">
+        <div class="tip-label">💡 Daily Fitness Tip</div>
+        <div class="tip-emoji" id="daily-tip-emoji">💪</div>
+        <div class="tip-text" id="daily-tip-text">Loading your daily tip...</div>
+      </div>
+    </section>
+
+    <!-- Chat -->
+    <section class="section" id="chat">
+      <div class="section-header">
+        <h2>💬 Chat with <span class="gradient-text">FitBot</span></h2>
+        <p>Ask anything about fitness, nutrition, workouts, supplements, injuries, mental health and more.</p>
+      </div>
+      <div class="chat-container">
+        <div class="chat-box">
+          <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-header-info">
+              <h3>FitBot AI</h3>
+              <span>Online — Ready to help</span>
+            </div>
+            <button class="clear-chat-btn" id="clear-chat-btn" title="Clear chat">🗑️</button>
+          </div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="typing-indicator" id="typing-indicator">
+            <div class="msg-avatar">🤖</div>
+            <div class="typing-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="quick-actions">
+            <button class="quick-btn" data-msg="How do I lose belly fat?">🔥 Fat Loss</button>
+            <button class="quick-btn" data-msg="How do I build muscle?">💪 Muscle Gain</button>
+            <button class="quick-btn" data-msg="What should I eat?">🥗 Nutrition</button>
+            <button class="quick-btn" data-msg="I have knee pain, what should I do?">🩹 Injury Help</button>
+            <button class="quick-btn" data-msg="How does intermittent fasting work?">⏰ Fasting</button>
+            <button class="quick-btn" data-msg="Give me a motivational quote">🔥 Motivation</button>
+            <button class="quick-btn" data-msg="Best home workout without equipment">🏠 Home Workout</button>
+            <button class="quick-btn" data-msg="How do I improve my posture?">🦴 Posture</button>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask me anything about fitness or wellness..." autocomplete="off">
+            <button class="send-btn" id="send-btn">➤</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plan Generator -->
+    <section class="section" id="plan">
+      <div class="section-header">
+        <h2>📋 Personalized <span class="gradient-text">Plan Generator</span></h2>
+        <p>Enter your details and get a customized workout and nutrition plan.</p>
+      </div>
+      <div class="plan-grid">
+        <div class="glass-card plan-form-card">
+          <form id="plan-form" class="plan-form">
+            <div class="form-group"><label for="age">Age</label><input type="number" id="age" placeholder="e.g. 25" min="14" max="100" required></div>
+            <div class="form-group"><label for="weight">Weight (kg)</label><input type="number" id="weight" placeholder="e.g. 70" step="0.1" min="30" max="300" required></div>
+            <div class="form-group"><label for="height">Height (cm)</label><input type="number" id="height" placeholder="e.g. 175" min="100" max="250" required></div>
+            <div class="form-group">
+              <label for="goal">Fitness Goal</label>
+              <select id="goal" required>
+                <option value="fat loss">🔥 Fat Loss</option>
+                <option value="muscle gain">💪 Muscle Gain</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="experience">Experience Level</label>
+              <select id="experience" required>
+                <option value="beginner">🌱 Beginner</option>
+                <option value="intermediate">⚡ Intermediate</option>
+                <option value="advanced">🏆 Advanced</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary submit-btn">⚡ Generate My Plan</button>
+          </form>
+        </div>
+        <div class="glass-card plan-result" id="plan-result">
+          <div class="empty-state">
+            <div class="icon" style="animation:float 3s ease-in-out infinite;">📋</div>
+            <p>Fill in your details and hit Generate<br>to see your custom fitness plan!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TOOLS SECTION ============ -->
+    <section class="section" id="tools">
+      <div class="section-header">
+        <h2>⚡ Fitness <span class="gradient-text">Tools</span></h2>
+        <p>Smart calculators and timers for your fitness journey.</p>
+      </div>
+      <div class="tools-grid">
+
+        <!-- BMI Calculator -->
+        <div class="glass-card tool-card" id="bmi-tool">
+          <div class="tool-title">🧮 BMI Calculator</div>
+          <div class="tool-body">
+            <div class="form-group"><label>Weight (kg)</label><input type="number" id="bmi-weight" placeholder="70" min="30" max="300"></div>
+            <div class="form-group"><label>Height (cm)</label><input type="number" id="bmi-height" placeholder="175" min="100" max="250"></div>
+            <button class="btn-primary" onclick="calcBMI()" style="width:100%;margin-top:.5rem">Calculate BMI</button>
+            <div class="bmi-result" id="bmi-result" style="display:none">
+              <div class="bmi-gauge-wrap">
+                <svg class="bmi-gauge" viewBox="0 0 200 110">
+                  <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="14" stroke-linecap="round"/>
+                  <path id="bmi-arc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251"/>
+                  <defs>
+                    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#00f0ff"/>
+                      <stop offset="50%" stop-color="#39ff14"/>
+                      <stop offset="100%" stop-color="#ff006e"/>
+                    </linearGradient>
+                  </defs>
+                  <text id="bmi-value-text" x="100" y="95" text-anchor="middle" fill="#f0f0f5" font-size="22" font-weight="bold">--</text>
+                </svg>
+              </div>
+              <div class="bmi-category" id="bmi-category"></div>
+              <div class="bmi-tip" id="bmi-tip"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TDEE Calculator -->
+        <div class="glass-card tool-card" id="tdee-tool">
+          <div class="tool-title">🔥 TDEE Calculator</div>
+          <div class="tool-body">
+            <div class="form-row">
+              <div class="form-group"><label>Age</label><input type="number" id="tdee-age" placeholder="25" min="14" max="100"></div>
+              <div class="form-group"><label>Weight (kg)</label><input type="number" id="tdee-weight" placeholder="70"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Height (cm)</label><input type="number" id="tdee-height" placeholder="175"></div>
+              <div class="form-group">
+                <label>Gender</label>
+                <select id="tdee-gender"><option value="male">Male</option><option value="female">Female</option></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Activity Level</label>
+              <select id="tdee-activity">
+                <option value="1.2">Sedentary (desk job, no exercise)</option>
+                <option value="1.375">Lightly Active (1-3 days/week)</option>
+                <option value="1.55" selected>Moderately Active (3-5 days/week)</option>
+                <option value="1.725">Very Active (6-7 days/week)</option>
+                <option value="1.9">Extra Active (athlete / physical job)</option>
+              </select>
+            </div>
+            <button class="btn-primary" onclick="calcTDEE()" style="width:100%;margin-top:.5rem">Calculate TDEE</button>
+            <div class="tdee-result" id="tdee-result" style="display:none">
+              <div class="tdee-cards">
+                <div class="tdee-card"><div class="tdee-val" id="tdee-bmr">--</div><div class="tdee-lbl">BMR</div></div>
+                <div class="tdee-card highlight"><div class="tdee-val" id="tdee-tdee">--</div><div class="tdee-lbl">TDEE</div></div>
+                <div class="tdee-card"><div class="tdee-val" id="tdee-cut">--</div><div class="tdee-lbl">Fat Loss</div></div>
+                <div class="tdee-card"><div class="tdee-val" id="tdee-bulk">--</div><div class="tdee-lbl">Muscle Gain</div></div>
+              </div>
+              <div class="macros-result" id="macros-result"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1RM Calculator -->
+        <div class="glass-card tool-card" id="orm-tool">
+          <div class="tool-title">🏋️ 1RM Calculator</div>
+          <div class="tool-body">
+            <div class="form-group"><label>Weight Lifted (kg)</label><input type="number" id="orm-weight" placeholder="100" min="1"></div>
+            <div class="form-group"><label>Reps Performed</label><input type="number" id="orm-reps" placeholder="8" min="1" max="30"></div>
+            <button class="btn-primary" onclick="calcORM()" style="width:100%;margin-top:.5rem">Calculate 1RM</button>
+            <div class="orm-result" id="orm-result" style="display:none">
+              <div class="orm-max" id="orm-max"></div>
+              <div class="orm-table" id="orm-table"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workout Timer -->
+        <div class="glass-card tool-card" id="timer-tool">
+          <div class="tool-title">⏱️ Workout Timer</div>
+          <div class="tool-body">
+            <div class="timer-tabs">
+              <button class="timer-tab active" onclick="switchTimer('stopwatch')">Stopwatch</button>
+              <button class="timer-tab" onclick="switchTimer('rest')">Rest Timer</button>
+            </div>
+            <!-- Stopwatch -->
+            <div id="stopwatch-panel">
+              <div class="timer-display" id="sw-display">00:00:00</div>
+              <div class="timer-controls">
+                <button class="timer-btn" id="sw-start" onclick="swToggle()">▶ Start</button>
+                <button class="timer-btn secondary" onclick="swReset()">↺ Reset</button>
+                <button class="timer-btn secondary" onclick="swLap()">⚑ Lap</button>
+              </div>
+              <div class="lap-list" id="lap-list"></div>
+            </div>
+            <!-- Rest Timer -->
+            <div id="rest-panel" style="display:none">
+              <div class="timer-display" id="rest-display">60</div>
+              <div class="rest-presets">
+                <button class="preset-btn" onclick="setRest(30)">30s</button>
+                <button class="preset-btn active" onclick="setRest(60)">60s</button>
+                <button class="preset-btn" onclick="setRest(90)">90s</button>
+                <button class="preset-btn" onclick="setRest(120)">2min</button>
+              </div>
+              <div class="rest-ring-wrap">
+                <svg class="rest-ring" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+                  <circle id="rest-ring-circle" cx="60" cy="60" r="50" fill="none" stroke="url(#ringGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+                  <defs><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00f0ff"/><stop offset="100%" stop-color="#8a2be2"/></linearGradient></defs>
+                </svg>
+              </div>
+              <div class="timer-controls">
+                <button class="timer-btn" id="rest-start" onclick="restToggle()">▶ Start</button>
+                <button class="timer-btn secondary" onclick="restReset()">↺ Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ TRACKER SECTION ============ -->
+    <section class="section" id="tracker">
+      <div class="section-header">
+        <h2>📊 Progress <span class="gradient-text">Tracker</span></h2>
+        <p>Log your workouts, water, and body measurements — all saved to the database.</p>
+      </div>
+      <div class="tracker-grid">
+
+        <!-- Water Tracker -->
+        <div class="glass-card tracker-card">
+          <div class="tool-title">💧 Water Intake Tracker</div>
+          <div class="water-tracker">
+            <div class="water-bottle-wrap">
+              <div class="water-bottle">
+                <div class="water-fill" id="water-fill"></div>
+                <div class="water-label" id="water-label">0 / 8</div>
+              </div>
+            </div>
+            <div class="water-glasses" id="water-glasses"></div>
+            <div class="water-controls">
+              <button class="btn-primary" onclick="addWater(1)">+ Add Glass (250ml)</button>
+              <button class="btn-secondary" onclick="removeWater()" style="margin-top:.5rem">- Remove</button>
+            </div>
+            <div class="water-tip" id="water-tip"></div>
+          </div>
+        </div>
+
+        <!-- Workout Logger -->
+        <div class="glass-card tracker-card">
+          <div class="tool-title">📝 Workout Logger</div>
+          <div class="logger-form">
+            <div class="form-row">
+              <div class="form-group"><label>Exercise</label><input type="text" id="log-exercise" placeholder="e.g. Bench Press"></div>
+              <div class="form-group"><label>Sets</label><input type="number" id="log-sets" placeholder="3" min="1" max="20"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Reps</label><input type="number" id="log-reps" placeholder="10" min="1" max="100"></div>
+              <div class="form-group"><label>Weight (kg)</label><input type="number" id="log-weight" placeholder="60" min="0" step="0.5"></div>
+            </div>
+            <button class="btn-primary" onclick="logWorkout()" style="width:100%">💾 Log Exercise</button>
+          </div>
+          <div class="log-table-wrap">
+            <table class="log-table" id="log-table">
+              <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>kg</th><th>Time</th></tr></thead>
+              <tbody id="log-body"></tbody>
+            </table>
+            <div class="log-empty" id="log-empty">No exercises logged today yet.</div>
+          </div>
+        </div>
+
+        <!-- Progress Logger -->
+        <div class="glass-card tracker-card">
+          <div class="tool-title">⚖️ Body Progress Log</div>
+          <div class="logger-form">
+            <div class="form-row">
+              <div class="form-group"><label>Weight (kg)</label><input type="number" id="prog-weight" placeholder="70" step="0.1"></div>
+              <div class="form-group"><label>Body Fat %</label><input type="number" id="prog-bf" placeholder="20" step="0.1"></div>
+            </div>
+            <div class="form-group"><label>Notes</label><input type="text" id="prog-notes" placeholder="Feeling great today..."></div>
+            <button class="btn-primary" onclick="logProgress()" style="width:100%">📈 Log Progress</button>
+          </div>
+          <div class="progress-history" id="progress-history"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ EXERCISE LIBRARY ============ -->
+    <section class="section" id="exercises">
+      <div class="section-header">
+        <h2>📚 Exercise <span class="gradient-text">Library</span></h2>
+        <p>Browse and search 40+ exercises with instructions and muscle targets.</p>
+      </div>
+      <div class="exercise-controls">
+        <input type="text" id="exercise-search" placeholder="🔍 Search exercises..." oninput="filterExercises()">
+        <div class="muscle-filters" id="muscle-filters"></div>
+      </div>
+      <div class="exercise-grid" id="exercise-grid"></div>
+    </section>
+
+    <!-- ============ ADMIN PANEL ============ -->
+    <section class="section" id="admin" style="display:none">
+      <div class="section-header">
+        <h2>👑 Admin <span class="gradient-text">Dashboard</span></h2>
+        <p>Manage all users, roles, and view platform-wide statistics.</p>
+      </div>
+      <div class="admin-stats-row" id="admin-stats"></div>
+      <div class="glass-card" style="padding:1.5rem;margin-top:1.5rem">
+        <div class="tool-title">👥 All Users</div>
+        <div style="overflow-x:auto">
+          <table class="log-table" style="min-width:600px">
+            <thead><tr><th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th>Actions</th></tr></thead>
+            <tbody id="admin-users-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <h2>🚀 Why <span class="gradient-text">FitBot AI</span>?</h2>
+        <p>Everything you need for a successful fitness journey.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card glass-card"><span class="feature-icon">🧠</span><h3>Smart AI Coach</h3><p>35+ fitness topics answered intelligently.</p></div>
+        <div class="feature-card glass-card"><span class="feature-icon">📋</span><h3>Custom Plans</h3><p>Personalized workout and nutrition plans based on your body metrics.</p></div>
+        <div class="feature-card glass-card"><span class="feature-icon">🗄️</span><h3>Database Tracking</h3><p>Workouts, water, and progress saved to a real SQLite database.</p></div>
+        <div class="feature-card glass-card"><span class="feature-icon">⚡</span><h3>7 Smart Tools</h3><p>BMI, TDEE, 1RM, Timer, Water Tracker, Workout Logger, Exercise Library.</p></div>
+        <div class="feature-card glass-card"><span class="feature-icon">📚</span><h3>Exercise Library</h3><p>40+ exercises with muscle groups, equipment, and instructions.</p></div>
+        <div class="feature-card glass-card"><span class="feature-icon">🌙</span><h3>Recovery Focus</h3><p>Sleep, stretching, rest day and injury rehab guidance.</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Built with 💜 by <a href="#">FitBot AI</a> — Your intelligent fitness companion</p>
+    <p style="margin-top:.5rem;">© 2026 FitBot AI. All rights reserved.</p>
+  </footer>
+
+  <script src="/static/particles.js"></script>
+  <script src="/static/cursor.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
